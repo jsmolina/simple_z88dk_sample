@@ -77,30 +77,30 @@ int main()
   sp1_AddColSpr(circle_sprite, SP1_DRAW_MASK2,    SP1_TYPE_2BYTE, 128*9, 1);
   sp1_AddColSpr(circle_sprite, SP1_DRAW_MASK2RB,  SP1_TYPE_2BYTE, 0, 1);
 
-  uint16_t  frame = 16;
+  uint16_t  frame = 0;
   x=5;
   while(1) {
-    sp1_MoveSprPix(circle_sprite, &full_screen,(int)sprite_protar1+frame - 16, x, 5);
+    sp1_MoveSprAbs(circle_sprite, &full_screen, (int)sprite_protar1+frame, 4, x, 5, 5);
 	sp1_UpdateNow();
     intrinsic_halt();
     intrinsic_halt();
 	intrinsic_halt();
 
     if(in_key_pressed(IN_KEY_SCANCODE_0)) {
-        frame = 16;
+        frame = 0;
     } else if(in_key_pressed(IN_KEY_SCANCODE_1)) {
         frame += 64;
     } else if(in_key_pressed(IN_KEY_SCANCODE_2)) {
         ++x;
-        if(frame == 16) {
-            frame = 80;
+        if(frame == 0) {
+            frame = 64;
         }  else {
-            frame = 16;
+            frame = 0;
         }
     }
 
-    if(frame == 528) {
-        frame = 16;
+    if(frame > 528) {
+        frame = 0;
     }
 
     if(x > 100) {
